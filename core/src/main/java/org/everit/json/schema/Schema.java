@@ -127,6 +127,15 @@ public abstract class Schema {
     }
 
     /**
+     * befor validate , try to convert the value to matching the schema
+     * @param input
+     * @return
+     */
+    public Object preConvertValue(Object input){
+        return  input;
+    }
+
+    /**
      * Determines if this {@code Schema} instance defines any restrictions for the object property
      * denoted by {@code field}. The {@code field} should be a JSON pointer, denoting the property to
      * be queried.

@@ -110,6 +110,53 @@ public class NumberSchema extends Schema {
         this(builder());
     }
 
+    public Object preConvertValue(Object input){
+        if(input.getClass().getName().equals("java.lang.String")){
+            String str = input.toString();
+            if(requiresInteger() && isInteger(str)){
+                return  Integer.parseInt(str);
+            }
+
+            if(isFloat(str)){
+                return Float.parseFloat(str);
+            }
+
+            if(isDouble(str)){
+                return Double.parseDouble(str);
+            }
+        }
+        return  input;
+    }
+
+    private static boolean isInteger(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+
+        }
+    }
+
+    private static boolean isFloat(String str) {
+        try {
+            Float.parseFloat(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+
+        }
+    }
+    private static boolean isDouble(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+
+        }
+    }
+
     /**
      * Constructor.
      *

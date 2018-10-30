@@ -168,7 +168,7 @@ class ValidatingVisitor extends Visitor {
 
     ValidationException getFailureOfSchema(Schema schema, Object input) {
         Object origSubject = this.subject;
-        this.subject = input;
+        this.subject = schema.preConvertValue(input);
         ValidationException rval = failureReporter.inContextOfSchema(schema, () -> visit(schema));
         this.subject = origSubject;
         return rval;
